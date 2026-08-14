@@ -1,0 +1,150 @@
+ai_client mod (vibecoded mc mod, be careful >:[  )
+This manual was written by Gemini too.
+
+1. Call AI
+/ai call "message"
+
+Asks a question or gives a command to the AI.
+Conversation history is saved in the current session.
+
+2. Configuration
+/ai config "key value"
+
+Examples:
+/ai config "provider groq"
+/ai config "model llama-3.3-70b-versatile"
+/ai config "session survival"
+
+Modifies the config/ai.json settings in your Minecraft folder.
+
+3. Check Current Settings
+/ai info
+
+Displays current AI configuration.
+
+4. List Sessions
+/ai sessions
+
+Shows a list of saved chat sessions.
+
+5. Switch Session
+/ai session "name"
+
+Switches to a specified chat session.
+
+6. Create New Session
+/ai new "name"
+
+Creates and switches to a new chat session.
+
+7. Clear Current Session
+/ai clear
+
+Deletes all chat history in the currently selected session.
+
+8. In-Game AI Chat
+When the AI outputs text in the following format, it will automatically broadcast to the public in-game chat:
+
+#chat Hello everyone!
+
+Chat message lengths are strictly limited by min_chat_len and max_chat_len settings.
+
+9. Baritone Control
+
+When control=true, the AI can execute Baritone commands starting with #.
+
+Examples:
+#goto 100 64 200
+#mine diamond_ore
+#follow Steve
+#stop
+
+Multiple commands can be generated, but executing consecutive Baritone commands in rapid succession may cause conflicts.
+
+10. Minecraft Commands
+
+When control=true, the AI can run vanilla Minecraft commands starting with /.
+
+Examples:
+/time set day
+/weather clear
+/tp @s 100 64 200
+
+Proper player permissions (OP/cheats enabled) are required to execute these commands.
+
+11. Key Configuration File
+
+File location:
+.minecraft/config/ai.json
+
+Key fields:
+
+provider
+The AI service provider to use.
+Examples: groq, ollama, openai, deepseek
+
+model
+The AI model name to use.
+
+api_key
+Your API Key for the selected provider.
+
+endpoint
+Custom API endpoint URL.
+If left empty, defaults to the default URL for the selected provider.
+
+temperature
+Randomness of the AI response. Default: 0.7
+
+max_tokens
+Maximum tokens for the AI response. Default: 2048
+
+timeout
+API request timeout in seconds. Default: 180
+
+session
+Current active session name. Default: default
+
+min_chat_len
+Minimum character length for #chat messages. Default: 5
+
+max_chat_len
+Maximum character length for #chat messages. Default: 100
+
+chat_prefix
+Prefix text attached to public Minecraft chat messages sent by AI.
+
+control
+Enables or disables Baritone and Minecraft command execution.
+true or false
+
+Example config.json:
+
+{
+  "provider": "groq",
+  "model": "llama-3.3-70b-versatile",
+  "api_key": "YOUR_API_KEY_HERE",
+  "temperature": 0.7,
+  "max_tokens": 2048,
+  "timeout": 180,
+  "session": "default",
+  "min_chat_len": 5,
+  "max_chat_len": 100,
+  "chat_prefix": "",
+  "control": true
+}
+
+12. Command Summary
+
+/ai call "message"     Call AI / Send prompt
+/ai config "key value" Change configuration
+/ai info               Check current configuration
+/ai sessions           List available sessions
+/ai session "name"     Switch active session
+/ai new "name"         Create new session
+/ai clear              Clear active session history
+
+AI Output Tags:
+#chat <message>        Sends message to public in-game chat
+#<command>             Executes Baritone command
+/<command>             Executes Minecraft command
